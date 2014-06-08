@@ -1,0 +1,10 @@
+#!/Users/Venom/Documents/Work/voteBank/Vote-Bank/project/bin/python2.7
+# EASY-INSTALL-ENTRY-SCRIPT: 'manage.py==0.2.5','console_scripts','manage'
+__requires__ = 'manage.py==0.2.5'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('manage.py==0.2.5', 'console_scripts', 'manage')()
+    )

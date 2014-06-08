@@ -15,3 +15,18 @@ def pp(o):
 g = facebook.GraphAPI(access_token)
 
 # Execute a few sample queries
+
+print '---------------'
+print 'Me'
+print '---------------'
+pp(g.get_connections('me'))
+print
+print '---------------'
+print 'My friends'
+print '---------------'
+pp(g.get_connections('me', 'friends'))
+print
+print '---------------'
+print "Social web"
+print '---------------'
+pp(g.requests("search", {'q' : 'social web', 'type' : 'page'}))
