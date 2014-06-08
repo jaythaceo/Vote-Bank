@@ -4,24 +4,15 @@ import requests
 import facebook
 import json
 
-access_token = 'CAACEdEose0cBALZCz9lH9XqceleRDRO3KXzvCh0H8Pnoyc62upJXVZB8yoLYU426ku31UhDb3BanC7ha77iALZCKqNdoW8IokzztkuBRBGJ63CGh0yfQwXfftygZBpeRoIcnofoer5oXNpzsP37uAZAWIFETzN8ZChi8kPAsu3nnkfq0NW4BujqZBaVGoJ9ziyjD8aFRZCbhlQZDZD'
-
+access_token = ''
 base_url = 'https://graph.facebook.com/me'
-
-g = facebook(access_token)
 
 # A helper function to pretty-print Python objects as JSON
 def pp(o):
     print json.dumps(o, indent=1)
 
 # Create a connection to the graph
-
-#g = facebook.GraphAPI(access_token)
-
-# Execute a few sample queries
-
-# Get 10 likes for 10 friends
-fields = 'id,name,friends.limit(100).fields(likes.limit(100))'
+g = facebook.GraphAPI(access_token)
 
 url = '%s?fields=%s&access_token=%s' % \
     (base_url, fields, access_token,)
@@ -39,3 +30,18 @@ content = requests.get(url).json()
 
 # Pretty-print the JSON and display it
 pp(g.get_connections('me', 'friends'))
+
+# Find Pepsi and Coke in search results
+pp(g.request('search', {'q' : 'pepsi', 'type' : 'page', 'limit' : 5}))
+pp(g.request('search', {'q' : 'coke', 'type' : 'page', 'limit' : 5}))
+
+# Use the ids to query for likes
+pepsi_id = '56381779049' # Could also use 'PepsiUS'
+coke_id = '40796308305'  # Could also use 'CocaCola'
+
+# A quick way to format integers with commas every 3 digits
+def int_format(n): return "{:,}".format(n)
+
+print "Pepsi likes:", int_format(g.get_object(pepsi_id)['likes'])
+print "Coke likes:", int_format(g.get_object(coke_id)['likes'])
+
