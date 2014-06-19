@@ -1,27 +1,10 @@
-#!/usr/bin/env python
-
-import requests
-import facebook
+import requests # pip install requests
 import json
-
-access_token = 'CAACEdEose0cBALZCz9lH9XqceleRDRO3KXzvCh0H8Pnoyc62upJXVZB8yoLYU426ku31UhDb3BanC7ha77iALZCKqNdoW8IokzztkuBRBGJ63CGh0yfQwXfftygZBpeRoIcnofoer5oXNpzsP37uAZAWIFETzN8ZChi8kPAsu3nnkfq0NW4BujqZBaVGoJ9ziyjD8aFRZCbhlQZDZD'
-
+access_token = 'CAACEdEose0cBAPIvgMxIehEANDJsrnYtHyJmw12OnllbahS44ZAS9VHIRTMsNk5mYnRh0LKZBB7OG6N88YyDO4TMXgaJSTn9NR8fMkJTbH5CRXxLtvtImEHKKNbE3xem9WTbfheLz5eWW7go4YAqkoSgltsAU9jnisbgtFO63dE08pvcconiDmGFU7MUIZD'
 base_url = 'https://graph.facebook.com/me'
 
-g = facebook(access_token)
-
-# A helper function to pretty-print Python objects as JSON
-def pp(o):
-    print json.dumps(o, indent=1)
-
-# Create a connection to the graph
-
-#g = facebook.GraphAPI(access_token)
-
-# Execute a few sample queries
-
 # Get 10 likes for 10 friends
-fields = 'id,name,friends.limit(100).fields(likes.limit(100))'
+fields = 'id,name,me.limit(100).fields(likes.limit(100))'
 
 url = '%s?fields=%s&access_token=%s' % \
     (base_url, fields, access_token,)
@@ -38,4 +21,4 @@ print url
 content = requests.get(url).json()
 
 # Pretty-print the JSON and display it
-pp(g.get_connections('me', 'friends'))
+print json.dumps(content, indent=1)

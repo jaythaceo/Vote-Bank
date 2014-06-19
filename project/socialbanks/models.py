@@ -1,6 +1,6 @@
 from django.db import models
 
-class Profiles(models.Model):
+class Votebank(models.Model):
 
     user_name = models.Charfield(
             max_length=255,
